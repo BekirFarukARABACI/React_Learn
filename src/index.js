@@ -184,7 +184,7 @@ root.render(
 
 import React from "react";
 import  ReactDOM  from "react-dom/client";
-import Garage from "./garage";
+import Car from "./car";
 
 
 
@@ -196,6 +196,6 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
 <>
-  <Garage />
+  <Car color="Mavi"/>
 </>
 )
