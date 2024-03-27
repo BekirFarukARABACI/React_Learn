@@ -184,7 +184,6 @@ root.render(
 
 import React from "react";
 import  ReactDOM  from "react-dom/client";
-import Car from "./car";
 import Garage from "./garage";
 
 
