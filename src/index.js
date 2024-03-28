@@ -450,7 +450,7 @@ root.render(
     <MyForm />
   </>
 )
-*/
+
 
 import React from "react";
 import ReactDOM from "react-dom/client";
@@ -484,3 +484,34 @@ root.render(
     <App/>
   </>
 )
+
+*/
+
+import React , {useState} from "react";
+import ReactDOM from "react-dom/client";
+import Todos from "./todos";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
+
+export default function App(){
+  const [count, setCount] = useState(0)
+  const [todos, setTodos] = useState(["Todo 1","Todo 2"])
+
+  const increment = () => {
+    setCount((count) => count + 1)
+  }
+  return(
+     <>
+      <h1>Memo</h1>
+      <Todos todos={todos}/>
+      <div>
+        Count : {count}
+        <button onClick={increment}>+</button>
+
+      </div>
+     </>
+  )
+}
+
+root.render(<App/>)
