@@ -325,7 +325,7 @@ root.render(
   </>
 )
 
-*/
+
 
 import React from "react";
 import ReactDOM from "react-dom/client";
@@ -370,5 +370,83 @@ root.render(
   <>
     <h1>Lists</h1>
     <Garage/>
+  </>
+)
+*/
+
+
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { useState } from "react";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
+function MyForm() {
+  // const [name,setName] = useState("");
+  // const [surName,setSurName] = useState("");
+  const [inputs, setInputs] = useState({});
+
+  const handleChange = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
+    setInputs(values => ({...values,[name]:
+      value}))
+  }
+
+
+
+  const handleSubmit = (event) => {
+    event.preventDefault(0);
+    console.log(inputs)
+  }
+
+  return <form onSubmit={handleSubmit}>
+    <label>Name</label>
+    <input
+      type="text"
+      name="userName"
+      value={inputs.userName || ""}
+      onChange={handleChange} />
+    <br />
+    <br />
+    <label>SurName</label>
+    <input
+      type="text"
+      name="lastName"
+      value={inputs.lastName || ""}
+      onChange={handleChange}
+    />
+    <br />
+    <br />
+    <label>Açıklama</label>
+    <textarea
+    name="description"
+    value={inputs.description || ""}
+    onChange={handleChange}
+    ></textarea>
+    <br />
+    <br />
+    <label>Şehir</label>
+    <select
+      name="city"
+      value={inputs.city || ""}
+      onChange={handleChange}
+    >
+      <option defaultChecked>Şehir seçiniz : </option>
+      <option>Konya</option>
+      <option>Antalya</option>
+      <option>İstanbul</option>
+      <option>İzmir</option>
+    </select>
+    <br />
+    <br />
+  <button type="submit">Save</button>
+  </form>
+}
+
+root.render(
+  <>
+    <h1>Forms</h1>
+    <MyForm />
   </>
 )
