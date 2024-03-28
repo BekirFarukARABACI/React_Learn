@@ -542,7 +542,7 @@ export default function App() {
 
 root.render(<App />)
 
-*/
+
 
 import React from "react";
 import ReactDOM from "react-dom/client";
@@ -557,6 +557,28 @@ export default function App() {
       <h1>Sass Styling
         <p>Mavi</p>
       </h1>
+    </>
+  )
+}
+
+root.render(<App />)
+
+*/
+
+import React , {useState} from "react";
+import ReactDOM from "react-dom/client";
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
+export default function App() {
+  const [color,setColor]=useState("kırmızı")
+  return (
+    <>
+      <h1>Hooks</h1>
+      <h4>Benim rengim {color}</h4>
+      <button onClick={() => setColor("mavi") }>Mavi</button>
+      <br/>
+      <br/>
+      <button onClick={() => setColor("Yeşil") }>Yeşil</button>
     </>
   )
 }
