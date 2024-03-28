@@ -229,7 +229,7 @@ root.render(
   </>
 )
 
-*/
+
 
 import React from "react";
 import ReactDOM from "react-dom/client";
@@ -250,7 +250,7 @@ function Football(){
   }
   return <button onClick={() => shoot("Goal")}>Take the shot!</button>
 }
-*/
+
 
 function Football(){
   const shoot = (message,event) => {
@@ -275,5 +275,52 @@ root.render(
   <>
     <h1>Events</h1>
     <Football/>
+  </>
+)
+
+*/
+
+
+import React from "react";
+import ReactDOM from "react-dom/client";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
+function MissedGoal() {
+  return <h1>Missed</h1>
+}
+
+function MadeGoal() {
+  return <h1>Goal!</h1>
+}
+
+function Goal(props) {
+  const isGoal = props.isGoal;
+
+  if (isGoal) {
+    return <MadeGoal />
+  }
+  return <MissedGoal />
+}
+
+function Garage(props) {
+  const cars = props.cars;
+  return (
+    <>
+      {cars.length> 0 && 
+      <h2>Araba sayın : {cars.length}</h2>
+      }
+    </>
+  );
+  
+}
+
+const cars = ["Ford"]
+root.render(
+  <>
+    <h1>Conditional</h1>
+    <Goal isGoal={false} />
+    <hr />
+    <Garage cars={cars} />
   </>
 )
