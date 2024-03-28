@@ -278,7 +278,7 @@ root.render(
   </>
 )
 
-*/
+
 
 
 import React from "react";
@@ -322,5 +322,53 @@ root.render(
     <Goal isGoal={false} />
     <hr />
     <Garage cars={cars} />
+  </>
+)
+
+*/
+
+import React from "react";
+import ReactDOM from "react-dom/client";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
+function Car(props){
+  return <li >{props.brand}</li>
+}
+
+function Garage(){
+  const cars = [
+    {
+      id :1,
+      brand: "BMW"
+    },
+    {
+      id :2,
+      brand: "Audi"
+    },
+    {
+      id :3,
+      brand: "Dacia"
+    },
+    {
+      id :4,
+      brand: "Mercedes"
+    }
+  ]
+  return <>
+    <h1>Who lives in my garage?</h1>
+
+    <ul>
+      {cars.map((car) => <Car 
+      key={car.id} 
+      brand = {car.brand}/>)}
+    </ul>
+  </>
+}
+
+root.render(
+  <>
+    <h1>Lists</h1>
+    <Garage/>
   </>
 )
