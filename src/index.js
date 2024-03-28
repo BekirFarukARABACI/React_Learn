@@ -199,7 +199,7 @@ root.render(
   <Car color="Mavi"/>
 </>
 )
-*/
+
 
 
 import React from "react";
@@ -226,5 +226,54 @@ root.render(
   <>
     <Car brand="BMW" />
     <Garage />
+  </>
+)
+
+*/
+
+import React from "react";
+import ReactDOM from "react-dom/client";
+
+/*
+
+function Football(){
+  const shoot = () => {
+    alert("Great shot!");
+  }
+  return <button onClick={shoot}>Take the shot!</button>
+}
+*/
+/*
+function Football(){
+  const shoot = (message) => {
+    alert(message);
+  }
+  return <button onClick={() => shoot("Goal")}>Take the shot!</button>
+}
+*/
+
+function Football(){
+  const shoot = (message,event) => {
+    alert(message);
+    console.log(event.type)
+  }
+
+  const getValue = (e) => {
+    console.log(e.target.value)
+  }
+  return <>
+      <input onKeyUp={(event) => getValue(event)}/>
+      <button onClick={(event) => shoot("Goal",event)}>Take the shot!</button>
+  </>
+}
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
+//onclick = "function()" onClick = {function}
+
+root.render(
+  <>
+    <h1>Events</h1>
+    <Football/>
   </>
 )
