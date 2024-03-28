@@ -485,7 +485,6 @@ root.render(
   </>
 )
 
-*/
 
 import React , {useState} from "react";
 import ReactDOM from "react-dom/client";
@@ -515,3 +514,30 @@ export default function App(){
 }
 
 root.render(<App/>)
+
+*/
+import React, { useState } from "react";
+import ReactDOM from "react-dom/client";
+import './app.css'
+import styles from './myStyle.module.css'
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
+export default function App() {
+  const myStyle = {
+    color: "Blue",
+    backgroundColor: "Green"
+  }
+  return (
+    <>
+      <h1>CSS Styling</h1>
+      <p style={{ color: "red", backgroundColor: "yellow" }}>Bekir Faruk ARABACI</p>
+      <p style={myStyle}>Gül Büyükeken</p>
+      <hr />
+      <h1>Css dosyasından css ayarlama</h1>
+      <h2 className={styles.bigBlue}>Style module üzerinden ayarlama</h2>
+    </>
+  )
+}
+
+root.render(<App />)
