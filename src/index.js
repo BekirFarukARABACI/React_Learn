@@ -180,7 +180,7 @@ root.render(
 )
 
 
-*/
+
 
 import React from "react";
 import  ReactDOM  from "react-dom/client";
@@ -198,4 +198,33 @@ root.render(
 <>
   <Car color="Mavi"/>
 </>
+)
+*/
+
+
+import React from "react";
+import ReactDOM from "react-dom/client";
+
+
+function Car(props) {
+  return <h2>I am a {props.brand.model}</h2>
+}
+
+function Garage() {
+  const carName = "Ford";
+  const carInfo = {name:"Ford",model:"Mustang"}
+  return <>
+    <h1>Who lives in my garage</h1>
+    <Car brand={carInfo} />
+  </>
+}
+
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
+root.render(
+  <>
+    <Car brand="BMW" />
+    <Garage />
+  </>
 )
