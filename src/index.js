@@ -563,7 +563,6 @@ export default function App() {
 
 root.render(<App />)
 
-*/
 
 import React , {useState} from "react";
 import ReactDOM from "react-dom/client";
@@ -579,6 +578,49 @@ export default function App() {
       <br/>
       <br/>
       <button onClick={() => setColor("Yeşil") }>Yeşil</button>
+    </>
+  )
+}
+
+root.render(<App />)
+*/
+
+import React, { useState } from "react";
+import ReactDOM from "react-dom/client";
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
+export default function App() {
+  const [name, setName] = useState("Taner saydam")
+  const [newName, setNewName] = useState("")
+  const [user, setUser] = useState({
+    name: "Bekir Faruk",
+    lastName: "Arabacı",
+    newName: ""
+  })
+
+  const updateNewName = (e) => {
+    setUser(prv => {
+      return { ...prv, newName: e.target.value }
+    })
+  }
+
+  const updateName = () => {
+    setUser(prv => {
+      return { ...prv, name: user.newName }
+    })
+  }
+
+  return (
+    <>
+      <h1>useState</h1>
+      <h4>Benim adım {user.name}</h4>
+      {/*<input value={name} onChange={(name)=> setName(name.target.value)}/>
+      <br/>
+      <br/>
+      <input value={newName} onChange={(name)=> setNewName(name.target.value)}/>
+  <button onClick={()=>setName(newName)}>Adımı değiştir</button>*/}
+      <input value={user.newName} onChange={updateNewName} />
+      <button onClick={updateName}>Adımı değiştir</button>
     </>
   )
 }
