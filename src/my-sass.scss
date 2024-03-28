@@ -1,0 +1,10 @@
+$myColor: red;
+
+h1{
+    color: $myColor;
+
+    p{
+        color: blue;
+        text-align: center;
+    }
+}

@@ -515,7 +515,7 @@ export default function App(){
 
 root.render(<App/>)
 
-*/
+
 import React, { useState } from "react";
 import ReactDOM from "react-dom/client";
 import './app.css'
@@ -536,6 +536,27 @@ export default function App() {
       <hr />
       <h1>Css dosyasından css ayarlama</h1>
       <h2 className={styles.bigBlue}>Style module üzerinden ayarlama</h2>
+    </>
+  )
+}
+
+root.render(<App />)
+
+*/
+
+import React from "react";
+import ReactDOM from "react-dom/client";
+import './my-sass.scss'
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
+export default function App() {
+
+  return (
+    <>
+      <h1>Sass Styling
+        <p>Mavi</p>
+      </h1>
     </>
   )
 }
