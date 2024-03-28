@@ -583,7 +583,7 @@ export default function App() {
 }
 
 root.render(<App />)
-*/
+
 
 import React, { useState } from "react";
 import ReactDOM from "react-dom/client";
@@ -614,11 +614,11 @@ export default function App() {
     <>
       <h1>useState</h1>
       <h4>Benim adım {user.name}</h4>
-      {/*<input value={name} onChange={(name)=> setName(name.target.value)}/>
+      {<input value={name} onChange={(name)=> setName(name.target.value)}/>
       <br/>
       <br/>
       <input value={newName} onChange={(name)=> setNewName(name.target.value)}/>
-  <button onClick={()=>setName(newName)}>Adımı değiştir</button>*/}
+  <button onClick={()=>setName(newName)}>Adımı değiştir</button>}
       <input value={user.newName} onChange={updateNewName} />
       <button onClick={updateName}>Adımı değiştir</button>
     </>
@@ -626,3 +626,30 @@ export default function App() {
 }
 
 root.render(<App />)
+
+*/
+
+import React, { useEffect, useState } from "react";
+import ReactDOM from "react-dom/client";
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
+export default function App(){
+  const [count,setCount] = useState(0);
+  const [name,setName] = useState("")
+
+  useEffect(()=>{
+    setTimeout(()=>{
+      setCount((count)=> count + 1)
+    },1000)
+  },[name])
+
+  return(
+    <>
+      <h1>useEffect</h1>
+      <h2>Sayfa Render Sayısı : {count}</h2>
+      <button onClick={() => setName("Bekir Faruk")}>Değiştir </button>
+    </>
+  )
+}
+
+root.render(<App/>)
