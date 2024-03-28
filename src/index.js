@@ -627,7 +627,7 @@ export default function App() {
 
 root.render(<App />)
 
-*/
+
 
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
@@ -648,6 +648,61 @@ export default function App(){
       <h1>useEffect</h1>
       <h2>Sayfa Render Sayısı : {count}</h2>
       <button onClick={() => setName("Bekir Faruk")}>Değiştir </button>
+    </>
+  )
+}
+
+root.render(<App/>)
+
+
+*/
+
+import React, {  createContext, useState, useContext } from "react";
+import ReactDOM from "react-dom/client";
+const root = ReactDOM.createRoot(document.getElementById("root"));
+const UserContext = createContext();
+
+export default function App(){
+  const [user,setUser] = useState("Bekir Faruk ARABACI")
+
+  return(
+    <>
+      <h1>useContext</h1>
+      {/*<h2>{`Merhaba ${user}`}</h2>
+      <Component1 user = {user}/>*/}
+
+      <UserContext.Provider value = {user}>
+        <h2>Merhaba {user}</h2>
+        <Component1 user = {user}/>
+      </UserContext.Provider>
+    </>
+  )
+}
+
+function Component1(){
+  return(
+    <>
+      <h4>Component 1</h4>
+      <Component2 />
+    </>
+  )
+}
+
+function Component2(){
+  return(
+    <>
+      <h4>Component 2</h4>
+      <Component3 />
+    </>
+  )
+}
+
+function Component3(){
+  const user = useContext(UserContext)
+  return(
+    <>
+      <h4>Component 3</h4>
+      <h5>Benim adım {user}</h5>
     </>
   )
 }
