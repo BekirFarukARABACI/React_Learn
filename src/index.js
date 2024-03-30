@@ -875,7 +875,7 @@ const expensiveCalculation = (num) => {
 root.render(<App />)
 
 */
-
+/*
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
 import useFetch from "./useFetch";
@@ -900,3 +900,89 @@ export default function App() {
 
 
 root.render(<App />)
+*/
+
+import axios from "axios";
+import React, { Component } from "react";
+import ReactDOM from "react-dom/client";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
+class AppComponent extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      title: "",
+      data: null,
+      isLoading: true,
+      error: null
+    }
+  };
+
+  handleInputChange = (event) => {
+    const { name, value } = event.target;
+    this.setState({ [name]: value })
+  }
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+    const { title } = this.state;
+    let model = { userId: 1, title: title, completed: true };
+    axios.post("https://jsonplaceholder.typicode.com/todos", model)
+      .then((res) => {
+        console.log(res)
+      })
+      .catch(err => {
+        this.setState({
+          error: err,
+          isLoading: false
+        })
+      });
+  }
+
+  componentDidMount() {
+    axios.get("https://jsonplaceholder.typicode.com/todos")
+      .then(res => {
+        this.setState({
+          data: res.data,
+          isLoading: false
+        });
+      })
+      .catch(err => {
+        this.setState({
+          isLoading: false,
+          error: err
+        })
+      })
+  }
+
+  render() {
+    const { data, isLoading, error } = this.state
+    if (isLoading) {
+      return <div>Yükleniyor</div>
+    }
+    if (error) {
+      return <div>Hata: {error.message}</div>
+    }
+    return (
+      <div>
+        <form onSubmit={this.handleSubmit}>
+          <div>
+            <label htmlFor="title">Başlık</label>
+            <input type="text" id="title" name="title" value={this.title} onChange={this.handleInputChange}></input>
+            <button type="submit">Gönder</button>
+          </div>
+        </form>
+        <hr/>
+        <h1>To do Listesi</h1>
+        <ul>
+          {data.map((item, index) => {
+            return <li key={index}>{item.title}</li>
+          })}
+        </ul>
+      </div>
+    )
+  }
+}
+
+root.render(<AppComponent />)
