@@ -824,6 +824,7 @@ export default function App() {
 root.render(<App />)
 
 */
+/*
 
 import React, { useMemo, useState } from "react";
 import ReactDOM from "react-dom/client";
@@ -870,5 +871,32 @@ const expensiveCalculation = (num) => {
     num += 1
   }
 }
+
+root.render(<App />)
+
+*/
+
+import React, { useEffect, useState } from "react";
+import ReactDOM from "react-dom/client";
+import useFetch from "./useFetch";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
+
+export default function App() {
+  const [data] = useFetch('https://jsonplaceholder.typicode.com/todos/');
+
+
+  return (
+    <>
+      <h1>Custom Hooks</h1>
+      {data &&
+        data.map((item, index) => {
+          return <p key={index}>{item.title}</p>
+        })}
+    </>
+  )
+}
+
 
 root.render(<App />)
