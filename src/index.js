@@ -655,7 +655,7 @@ export default function App(){
 root.render(<App/>)
 
 
-*/
+
 
 import React, {  createContext, useState, useContext } from "react";
 import ReactDOM from "react-dom/client";
@@ -668,8 +668,8 @@ export default function App(){
   return(
     <>
       <h1>useContext</h1>
-      {/*<h2>{`Merhaba ${user}`}</h2>
-      <Component1 user = {user}/>*/}
+      {<h2>{`Merhaba ${user}`}</h2>
+      <Component1 user = {user}/>}
 
       <UserContext.Provider value = {user}>
         <h2>Merhaba {user}</h2>
@@ -708,3 +708,44 @@ function Component3(){
 }
 
 root.render(<App/>)
+
+*/
+
+
+import React, { useEffect, useState, useRef } from "react";
+import ReactDOM from "react-dom/client";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
+export default function App() {
+  /*
+  const [inputValue, setInputValue] = useState("");
+  const count = useRef(0);
+
+  useEffect(() => {
+    count.current = count.current + 1
+  });
+  */
+
+  const inputRef = useRef(null)
+  const[value , setValue] = useState("")
+
+  const handleClick = ()=>{
+    console.log(inputRef.current.value)
+    setValue(inputRef.current.value)
+  }
+
+  return (
+    <>
+      <h1>useRef</h1>
+      <input
+        type="text"
+        ref={inputRef}
+      />
+      <button onClick={handleClick}>Değeri göster</button>
+      <h1>{value}</h1>
+    </>
+  )
+}
+
+root.render(<App />)
