@@ -1183,7 +1183,7 @@ const root = ReactDOM.createRoot(document.getElementById("root"))
 root.render(<AppComponent />)
 
 */
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import ReactDOM from "react-dom/client"
 import { BrowserRouter, Link, Outlet, Route, Routes, useNavigate} from "react-router-dom";
 
@@ -1209,6 +1209,7 @@ function LoginComponent() {
   }
   const handleButtonClick2 = () =>{
     //Sayfa yenileyerek diğer sayfaya atmayı önlemek için
+    localStorage.setItem("token","Deneme Token")
     navigate("/")
   }
 
@@ -1222,6 +1223,20 @@ function LoginComponent() {
 }
 
 function LayoutComponent() {
+  const navigate = useNavigate();
+
+  useEffect(()=>{
+    if (!localStorage.getItem("token")) {
+      navigate("/login")
+    }
+  })
+
+  function logOut(){
+    localStorage.clear();
+    localStorage.removeItem("token")
+    navigate("/login")
+  }
+
   return (
     <>
       <nav>
@@ -1231,6 +1246,9 @@ function LayoutComponent() {
           </li>
           <li><Link to="/about"> About</Link></li>
           <li><Link to="/login"> Login</Link></li>
+          <li>
+            <a onClick={logOut}>Çıkış Yap</a>
+          </li>
         </ul>
       </nav>
 
