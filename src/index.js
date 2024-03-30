@@ -751,6 +751,7 @@ export default function App() {
 root.render(<App />)
 
 */
+/*
 
 import React , {useReducer} from "react";
 import ReactDOM from "react-dom/client";
@@ -780,6 +781,41 @@ export default function App() {
       <h2>Count {state.count}</h2>
       <button onClick={()=> dispatch({type : 'increment'})}>+</button>
       <button onClick={()=> dispatch({type : 'decrement'})}>-</button>
+    </>
+  )
+}
+
+root.render(<App />)
+
+*/
+
+import React , {useCallback, useState}  from "react";
+import ReactDOM from "react-dom/client";
+import Todos from "./todo";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
+
+export default function App() {
+  const [count,setCount] = useState(0)
+  const [todos,setTodos] = useState([])
+
+  const increment = () => {
+    setCount((c) => c+1)
+  }
+
+  const addTodo = useCallback(() => {
+    setTodos((t)=>[...t,"New Todo"])
+  },[todos])
+
+  return (
+    <>
+      <h1>useCallBack</h1>
+      <Todos todos= {todos} addTodo = {addTodo}/>
+      <div>
+        Count : {count}
+        <button onClick={increment}> + </button>
+      </div>
     </>
   )
 }
