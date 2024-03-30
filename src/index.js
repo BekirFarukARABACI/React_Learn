@@ -1116,6 +1116,7 @@ function AppComponent(){
 const root = ReactDOM.createRoot(document.getElementById("root"))
 root.render(<AppComponent/>)
 */
+/*
 
 import React, { useState } from "react";
 import ReactDOM from "react-dom/client"
@@ -1174,6 +1175,86 @@ function AppComponent() {
           </tr>
         ))}
       </table>
+    </>
+  )
+}
+
+const root = ReactDOM.createRoot(document.getElementById("root"))
+root.render(<AppComponent />)
+
+*/
+import React, { useState } from "react";
+import ReactDOM from "react-dom/client"
+import { BrowserRouter, Link, Outlet, Route, Routes, useNavigate} from "react-router-dom";
+
+function HomeComponent() {
+  return (
+    <>
+      <h1>Home Component</h1>
+    </>
+  )
+}
+function AboutComponent() {
+  return (
+    <>
+      <h1>About Component</h1>
+    </>
+  )
+}
+function LoginComponent() {
+  const navigate = useNavigate()
+  const handleButtonClick = () =>{
+    //Sayfa yenileyerek diğer sayfaya atıyor
+    window.location.href = "/"
+  }
+  const handleButtonClick2 = () =>{
+    //Sayfa yenileyerek diğer sayfaya atmayı önlemek için
+    navigate("/")
+  }
+
+  return (
+    <>
+      <h1>Login Component</h1>
+      <button onClick={handleButtonClick}>Sasyfa yenileyerek Giriş Yap</button>
+      <button onClick={handleButtonClick2}>Tek sayfa kurallarına uygun Giriş Yap</button>
+    </>
+  )
+}
+
+function LayoutComponent() {
+  return (
+    <>
+      <nav>
+        <ul>
+          <li>
+            <Link to="/"> Home</Link>
+          </li>
+          <li><Link to="/about"> About</Link></li>
+          <li><Link to="/login"> Login</Link></li>
+        </ul>
+      </nav>
+
+      {/* Seçilen yapının yerleşmesini Outlet sağlıyor */}
+      <Outlet/>
+    </>
+  )
+}
+
+
+
+function AppComponent() {
+  return (
+    <>
+    <BrowserRouter>
+      <Routes>
+      <Route path="/" element={<LayoutComponent/>}>
+        <Route index element={<HomeComponent/>}/>
+        <Route path="about" element={<AboutComponent/>}/>
+      </Route>
+      <Route path="login" element={<LoginComponent/>}/>
+
+      </Routes>
+    </BrowserRouter>
     </>
   )
 }
