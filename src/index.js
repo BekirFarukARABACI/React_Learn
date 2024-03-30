@@ -901,6 +901,7 @@ export default function App() {
 
 root.render(<App />)
 */
+/*
 
 import axios from "axios";
 import React, { Component } from "react";
@@ -984,5 +985,98 @@ class AppComponent extends Component {
     )
   }
 }
+
+root.render(<AppComponent />)
+*/
+
+
+import axios from "axios";
+import React, { Component, useEffect, useState } from "react";
+import ReactDOM from "react-dom/client";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
+function AppComponent() {
+  const [title, setTitle] = useState("")
+  const [completed, setCompleted] = useState(false)
+  const [response, setResponse] = useState(null)
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState(null)
+  const [todos, setTodos] = useState([])
+
+  const handleInputChange = (event) => {
+    const { name, value, type, checked } = event.target;
+    type === 'checkbox' ? setCompleted(checked) : setTitle(value)
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setIsLoading(true)
+    axios.post("https://jsonplaceholder.typicode.com/todos",
+      { title, completed })
+      .then(res => {
+        setResponse(res.data)
+        setIsLoading(false)
+      })
+      .catch(err => {
+        setError(err)
+        setIsLoading(false)
+      })
+  }
+
+  useEffect(() => {
+    setIsLoading(true)
+    axios.get("https://jsonplaceholder.typicode.com/todos")
+      .then(response => {
+        setTodos(response.data)
+        setIsLoading(false)
+      })
+      .catch(err => {
+        setError(err)
+        setIsLoading(false)
+      })
+  }, [])
+
+  return <>
+    <h1>Function Component</h1>
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label htmlFor="title">Başlık</label>
+        <input type="text"
+          id="title"
+          name="title"
+          value={title}
+          onChange={handleInputChange}
+        ></input>
+      </div>
+      <div>
+        <label htmlFor="completed">Tamamlandı mı?</label>
+        <input type="checkbox"
+          id="completed"
+          name="completed"
+          checked={completed}
+          onChange={handleInputChange}
+        ></input>
+      </div>
+      <button type="submit">Gönder</button>
+    </form>
+    {isLoading && <div>Loading...</div>}
+    {error && <div>Error : {error}</div>}
+    {response && (
+      <div>
+        <h2>Sonuç : </h2>
+        <p>ID : {response.id}</p>
+        <p>Başlık: {response.title}</p>
+        <p>Tamamlandı mı {response.completed ? "Evet" : "Hayır"}</p>
+      </div>
+    )}
+    <ul>
+      {todos.map((todo, index) => (
+        <li key={index}>{todo.title}</li>
+      ))}
+    </ul>
+  </>
+}
+
 
 root.render(<AppComponent />)
