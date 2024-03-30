@@ -988,7 +988,7 @@ class AppComponent extends Component {
 
 root.render(<AppComponent />)
 */
-
+/*
 
 import axios from "axios";
 import React, { Component, useEffect, useState } from "react";
@@ -1080,3 +1080,37 @@ function AppComponent() {
 
 
 root.render(<AppComponent />)
+*/
+
+import React, { useState } from "react";
+import ReactDOM from "react-dom/client"
+
+function AppComponent(){
+  const[names,setNames] = useState([
+    "Faruk",
+    "Ahmet",
+    "Ayşe",
+    "Gül"
+  ])
+  const [search,setSearch] = useState("")
+
+  const filteredNames = names.filter(s => 
+    s.toLowerCase().includes(search.toLowerCase()))
+
+  return(
+    <>
+      <h1>Search</h1>
+      <input type="search"
+      value={search}
+      onChange={(e)=>setSearch(e.target.value)}/>
+      <ul>
+        {filteredNames.map((name,index)=>(
+          <li key={index}>{name}</li>
+        ))}
+      </ul>
+    </>
+  )
+}
+
+const root = ReactDOM.createRoot(document.getElementById("root"))
+root.render(<AppComponent/>)
