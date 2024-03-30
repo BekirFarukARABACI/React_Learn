@@ -1081,6 +1081,7 @@ function AppComponent() {
 
 root.render(<AppComponent />)
 */
+/*
 
 import React, { useState } from "react";
 import ReactDOM from "react-dom/client"
@@ -1114,3 +1115,68 @@ function AppComponent(){
 
 const root = ReactDOM.createRoot(document.getElementById("root"))
 root.render(<AppComponent/>)
+*/
+
+import React, { useState } from "react";
+import ReactDOM from "react-dom/client"
+
+function AppComponent() {
+  const [search, setSearch] = useState("")
+  const [users, setUsers] = useState([
+    {
+      name: "Bekir Faruk",
+      lastName: "Arabacı",
+      age: 22
+    },
+    {
+      name: "Gül",
+      lastName: "Büyükeken",
+      age: 22
+    },
+    {
+      name: "Selim",
+      lastName: "özdemir",
+      age: 20
+    },
+    {
+      name: "Burak",
+      lastName: "Mumcu",
+      age: 21
+    }
+  ])
+
+  const filteredNames = users.filter(user =>
+    user.name.toLowerCase().includes(search.toLowerCase()) ||
+    user.lastName.toLowerCase().includes(search.toLowerCase()) ||
+    user.age.toString().includes(search))
+
+  return (
+    <>
+      <h1>Multi Search</h1>
+      <input
+        type="search"
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+      />
+      <table>
+        <tr>
+          <th># </th>
+          <th>Name </th>
+          <th>LastName</th>
+          <th>Age</th>
+        </tr>
+        {filteredNames.map((user, index) => (
+          <tr>
+            <td>{index + 1}</td>
+            <td>{user.name}</td>
+            <td>{user.lastName}</td>
+            <td>{user.age}</td>
+          </tr>
+        ))}
+      </table>
+    </>
+  )
+}
+
+const root = ReactDOM.createRoot(document.getElementById("root"))
+root.render(<AppComponent />)
